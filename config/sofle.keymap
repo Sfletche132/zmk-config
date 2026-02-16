@@ -45,10 +45,10 @@
             //               | GUI | ALT  | CTRL | LOWER|  ENTER |  | SPACE | RAISE| CTRL  | ALT   | GUI  |
 
             bindings = <
-&kp GRAVE       &kp N1  &kp N2        &kp N3        &kp N4     &kp N5                                          &kp N6       &kp N7     &kp N8          &kp N9     &kp N0    &kp BSPC
-&kp TAB         &kp Q   &kp W         &kp E         &kp R      &kp T                                           &kp Y        &kp U      &kp I           &kp O      &kp P     &kp LEFT_BRACE
+&kp GRAVE       &kp N1  &kp N2        &kp N3        &kp N4     &kp N5                                          &kp N6       &kp N7     &kp N8          &kp N9     &kp N0    &kp BACKSPACE
+&kp TAB         &kp Q   &kp W         &kp E         &kp R      &kp T                                           &kp Y        &kp U      &kp I           &kp O      &kp P     &kp LEFT_BRACKET
 &kp LEFT_SHIFT  &kp A   &kp S         &kp D         &kp F      &kp G                                           &kp H        &kp J      &kp K           &kp L      &kp SEMI  &kp DOUBLE_QUOTES
-&kp LCTRL       &kp Z   &kp X         &kp C         &kp V      &kp B       &kp C_MUTE    &tog 2                &kp N        &kp M      &kp COMMA       &kp DOT    &kp FSLH  &kp RIGHT_BRACE
+&kp LCTRL       &kp Z   &kp X         &kp C         &kp V      &kp B       &kp C_MUTE    &tog 2                &kp N        &kp M      &kp COMMA       &kp DOT    &kp FSLH  &kp RIGHT_BRACKET
                         &kp LEFT_WIN  &kp LEFT_ALT  &kp SPACE  &lt 2 HASH  &kp ENTER     &kp NON_US_BACKSLASH  &lt 1 MINUS  &kp EQUAL  &kp LEFT_ARROW  &kp RIGHT
             >;
 
