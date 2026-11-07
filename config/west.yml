@@ -11,6 +11,6 @@ manifest:
       import: app/west.yml
     - name: custom-zmk-animation
       remote: sfletche132
-      revision: hud
+      revision: main
   self:
     path: config
