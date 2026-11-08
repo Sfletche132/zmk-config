@@ -1,6 +1,0 @@
-/* The Sofle's underglow SPI (spi3) drives P0.06, which is the nice!view
- * adapter's chip-select (pro_micro 1). With it enabled the screens never
- * get selected. Underglow isn't enabled in sofle.conf, so turn it off. */
-&spi3 {
-    status = "disabled";
-};
