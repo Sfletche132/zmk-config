@@ -14,20 +14,21 @@ mod=$HOME/Code/custom-zmk-animation
 out=$ws/out
 mkdir -p "$ws/custom-zmk-animation" "$out"
 
-run() {
+run() { # cmd [extra docker args]
     docker run --rm -u "$(id -u):$(id -g)" -e HOME=/tmp -e ZEPHYR_BASE=/ws/zephyr \
-        -v "$ws:/ws" -v "$cfg/config:/ws/config" -v "$mod:/ws/custom-zmk-animation" \
+        -v "$ws:/ws" -v "$cfg/config:/ws/config" "${@:2}" \
         -w /ws zmkfirmware/zmk-build-arm:stable bash -c "$1"
 }
 
 if [ ! -d "$ws/.west" ] || [ "${1:-}" = update ]; then
+    # Local module not mounted here: west update would check it out and detach its HEAD.
     run "[ -d .west ] || west init -l config; west update --fetch-opt=--filter=tree:0"
     [ "${1:-}" = update ] && exit 0
 fi
 
 build() { # name board shield extra-args
     run "west build -s zmk/app -d build/$1 -b $2 -p auto -- -DZephyr_DIR=/ws/zephyr/share/zephyr-package/cmake -DZMK_CONFIG=/ws/config \
-        -DSHIELD='$3' $4 ${CMAKE_EXTRA:-}"
+        -DSHIELD='$3' $4 ${CMAKE_EXTRA:-}" -v "$mod:/ws/custom-zmk-animation"
     cp "$ws/build/$1/zephyr/zmk.uf2" "$out/$1.uf2"
     echo "-> $out/$1.uf2"
 }
