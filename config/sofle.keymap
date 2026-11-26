@@ -15,37 +15,17 @@
     cs-gpios = <&pro_micro 4 GPIO_ACTIVE_HIGH>;
 };
 
-/* Home-row mods. Key positions: rows of 12, 12, 12, 14 (incl. encoders), 10 (thumbs). */
-#define KEYS_L 0 1 2 3 4 5 12 13 14 15 16 17 24 25 26 27 28 29 36 37 38 39 40 41 42
-#define KEYS_R 6 7 8 9 10 11 18 19 20 21 22 23 30 31 32 33 34 35 43 44 45 46 47 48 49
-#define THUMBS 50 51 52 53 54 55 56 57 58 59
-
 / {
-    behaviors {
-        /* Hold = modifier only when the next key is on the other hand or a thumb;
-         * fast typing (key within 150ms) always taps. Raise tapping-term-ms if
-         * mods misfire, lower it if they feel slow. */
-        hml: home_row_mod_left {
-            compatible = "zmk,behavior-hold-tap";
-            #binding-cells = <2>;
-            flavor = "balanced";
-            tapping-term-ms = <280>;
-            quick-tap-ms = <175>;
-            require-prior-idle-ms = <150>;
-            bindings = <&kp>, <&kp>;
-            hold-trigger-key-positions = <KEYS_R THUMBS>;
-            hold-trigger-on-release;
+    macros {
+        cpp_scope: cpp_scope {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&macro_tap &kp LS(SEMI) &kp LS(SEMI)>;
         };
-        hmr: home_row_mod_right {
-            compatible = "zmk,behavior-hold-tap";
-            #binding-cells = <2>;
-            flavor = "balanced";
-            tapping-term-ms = <280>;
-            quick-tap-ms = <175>;
-            require-prior-idle-ms = <150>;
-            bindings = <&kp>, <&kp>;
-            hold-trigger-key-positions = <KEYS_L THUMBS>;
-            hold-trigger-on-release;
+        cpp_arrow: cpp_arrow {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&macro_tap &kp MINUS &kp LS(DOT)>;
         };
     };
 
@@ -75,7 +55,7 @@
             bindings = <
                 &kp ESC            &kp N1           &kp N2           &kp N3           &kp N4               &kp N5                                           &kp N6       &kp N7      &kp N8      &kp N9        &kp N0           &kp BSPC
                 &kp TAB            &kp Q            &kp W            &kp E            &kp R                &kp T                                            &kp Y        &kp U       &kp I       &kp O         &kp P            &kp LBKT
-                &kp LSHFT          &hml LGUI A      &hml LALT S      &hml LCTRL D     &hml LSHFT F         &kp G                                            &kp H        &hmr RSHFT J &hmr RCTRL K &hmr RALT L &hmr RGUI SEMI      &kp SQT
+                &kp LSHFT          &kp A            &kp S            &kp D            &kp F                &kp G                                            &kp H        &kp J        &kp K        &kp L       &kp SEMI            &kp SQT
                 &kp LCTRL          &kp Z            &kp X            &kp C            &kp V                &kp B              &kp C_MUTE         &tog 2     &kp N        &kp M       &kp COMMA   &kp DOT       &kp FSLH         &kp RBKT
                                                     &kp LGUI         &kp LALT         &kp LS(NON_US_BSLH)  &lt 2 NON_US_HASH  &kp SPACE          &kp RET    &lt 1 MINUS  &kp EQUAL   &kp LEFT    &kp RIGHT
             >;
@@ -84,12 +64,13 @@
 
         lower_layer {
             display-name = "lower";
+            /* Left hand: C++ symbols. Right hand: numpad (7-8-9 / 4-5-6 / 1-2-3, 0 under 1) + operators. */
             bindings = <
-                &kp ESC            &kp F1           &kp F2           &kp F3           &kp F4               &kp F5                                           &kp F6       &kp F7      &kp F8      &kp F9        &kp F10          &kp F11
-                &trans             &trans           &trans           &trans           &trans               &trans                                           &kp N6       &kp N7      &kp N8      &kp N9        &kp N0           &kp F12
-                &kp CAPS           &trans           &trans           &trans           &trans               &trans                                           &kp LS(N6)   &kp LS(N7)  &kp LS(N8)  &kp LS(N9)    &kp LS(N0)       &kp LS(BSLH)
-                &kp LS(MINUS)      &kp MINUS        &kp KP_PLUS      &kp EQUAL        &kp LS(LBKT)         &kp LS(RBKT)       &trans             &trans     &kp LBKT     &kp RBKT    &kp SEMI    &kp LS(SEMI)  &kp NON_US_BSLH  &kp NON_US_HASH
-                                                    &trans           &trans           &trans               &trans             &kp NON_US_BSLH    &trans     &trans       &trans      &trans      &trans
+                &kp ESC          &kp LS(SQT)      &kp LS(N4)       &kp LS(N5)       &kp LS(N6)       &kp LS(NON_US_HASH) &kp F6           &kp F7           &kp F8           &kp F9           &kp F10          &kp F11
+                &kp NON_US_BSLH  &kp LS(N1)       &kp LS(COMMA)    &kp LS(DOT)      &kp LS(N7)       &kp LS(NON_US_BSLH) &kp LS(SEMI)     &kp N7           &kp N8           &kp N9           &kp LS(N8)       &kp FSLH
+                &kp CAPS         &kp LS(LBKT)     &kp LS(N9)       &kp LS(N0)       &kp LS(RBKT)     &kp LS(FSLH)     &kp EQUAL        &kp N4           &kp N5           &kp N6           &kp MINUS        &kp LS(EQUAL)
+                &kp LS(MINUS)    &kp LBKT         &kp RBKT         &cpp_scope       &cpp_arrow       &kp LS(N2)       &trans           &trans           &kp N0           &kp N1           &kp N2           &kp N3           &kp DOT          &kp COMMA
+                                                    &trans           &trans           &trans               &trans             &trans                &trans     &trans       &trans      &trans      &trans
             >;
             sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
         };
@@ -97,7 +78,7 @@
         raise_layer {
             display-name = "raise";
             bindings = <
-                &kp GRAVE          &kp F1           &kp F2           &kp F3           &kp F4               &kp F5                                           &bt BT_NXT   &bt BT_PRV  &bt BT_CLR  &trans        &trans           &kp DEL
+                &kp GRAVE          &kp F1           &kp F2           &kp F3           &kp F4               &kp F5                                           &bt BT_NXT   &bt BT_PRV  &bt BT_CLR  &kp F12      &trans           &kp DEL
                 &trans             &kp INS          &trans           &trans           &trans               &kp LS(TAB)                                      &kp PG_UP    &trans      &kp UP      &trans        &kp N0           &trans
                 &trans             &kp LC(A)        &trans           &trans           &trans               &kp DEL                                          &kp PG_DN    &kp LEFT    &kp DOWN    &kp RIGHT     &kp DEL          &kp LS(NON_US_BSLH)
                 &trans             &kp LC(Z)        &kp LC(X)        &kp LC(C)        &kp LC(V)            &kp RET            &bt BT_CLR         &trans     &trans       &trans      &trans      &trans        &trans           &kp NON_US_HASH
