@@ -78,10 +78,10 @@
         raise_layer {
             display-name = "raise";
             bindings = <
-                &kp GRAVE          &kp F1           &kp F2           &kp F3           &kp F4               &kp F5                                           &bt BT_NXT   &bt BT_PRV  &bt BT_CLR  &kp F12      &trans           &kp DEL
+                &kp GRAVE          &kp F1           &kp F2           &kp F3           &kp F4               &kp F5                                           &trans       &trans      &trans      &kp F12      &trans           &kp DEL
                 &trans             &kp INS          &trans           &trans           &trans               &kp LS(TAB)                                      &kp PG_UP    &trans      &kp UP      &trans        &kp N0           &trans
                 &trans             &kp LC(A)        &trans           &trans           &trans               &kp DEL                                          &kp PG_DN    &kp LEFT    &kp DOWN    &kp RIGHT     &kp DEL          &kp LS(NON_US_BSLH)
-                &trans             &kp LC(Z)        &kp LC(X)        &kp LC(C)        &kp LC(V)            &kp RET            &bt BT_CLR         &trans     &trans       &trans      &trans      &trans        &trans           &kp NON_US_HASH
+                &trans             &kp LC(Z)        &kp LC(X)        &kp LC(C)        &kp LC(V)            &kp RET            &trans             &trans     &trans       &trans      &trans      &trans        &trans           &kp NON_US_HASH
                                                     &trans           &trans           &trans               &trans             &trans             &kp RSHFT  &kp ESC      &trans      &trans      &trans
             >;
             sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
@@ -90,7 +90,7 @@
         adjust_layer {
             display-name = "adjust";
             bindings = <
-                &bt BT_CLR         &bt BT_SEL 0     &bt BT_SEL 1     &bt BT_SEL 2     &bt BT_SEL 3         &bt BT_SEL 4                                     &studio_unlock        &none       &none       &none         &none            &none
+                &bt BT_CLR         &bt BT_SEL 0     &bt BT_SEL 1     &bt BT_SEL 2     &bt BT_SEL 3         &bt BT_SEL 4                                     &studio_unlock        &bt BT_PRV  &bt BT_NXT      &none         &none            &none
                 &ext_power EP_TOG  &rgb_ug RGB_HUD  &rgb_ug RGB_HUI  &rgb_ug RGB_SAD  &rgb_ug RGB_SAI      &rgb_ug RGB_EFF                                  &none        &none       &none       &none         &none            &none
                 &none              &rgb_ug RGB_BRD  &rgb_ug RGB_BRI  &none            &none                &tog 4                                           &none        &none       &none       &none         &none            &none
                 &none              &none            &none            &none            &none                &none              &rgb_ug RGB_TOG    &none      &none        &none       &none       &none         &none            &none
